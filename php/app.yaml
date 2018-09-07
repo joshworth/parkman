@@ -1,0 +1,13 @@
+runtime: php55
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /.*
+  script: ParkApi.php
+env_variables:
+  # Replace USER, PASSWORD, DATABASE, and CONNECTION_NAME with the
+  # values obtained when configuring your Cloud SQL instance.
+  MYSQL_DSN: mysql:unix_socket=/cloudsql/genesis-214216:southamerica-east1:genesis
+  MYSQL_USER: root
+  MYSQL_PASSWORD: lion of judah

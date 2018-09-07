@@ -1,0 +1,170 @@
+{"parkArea":"AREA 1",
+"driver_name":"",
+"driver_id":"",
+"time_out":"0",
+
+"time_in":"1534867351210",
+
+"driver_phone":"",
+
+"stickerNo":"111",
+"regNo":"UAN999H",
+"driverPhoto":"",
+"pin":"111",
+"category":"Car",
+"id":"0",
+"dev_out":"","color":"black",
+
+"dev_in":"357262078810848",
+
+"vehPhoto":"","foot":null,"ver":"0"}
+
+1534933301000
+1534867351210
+
+[22-Aug-2018 15:59:00 Europe/Berlin] {"action":"refresh.data","sync_mark":{"admin":1534850729421,"tariff":1534850729421,"make":1534850729421}}
+
+python dev_appserver.py app.yaml
+=======================================================
+python "C:\Users\josh\AppData\Local\Google\Cloud SDK\google-cloud-sdk\bin\dev_appserver.py" --port 8888 app.yaml
+http://localhost:8888
+========================================================
+gcloud app deploy
+gcloud app browse
+https://genesis-214216.appspot.com
+=======================================================
+
+DB
+backendType: SECOND_GEN
+connectionName: genesis-214216:southamerica-east1:genesis
+databaseVersion: MYSQL_5_7
+etag: '"6fNGoGJ6WfWOiGfCa02dVapvSvA/Mw"'
+gceZone: southamerica-east1-c
+instanceType: CLOUD_SQL_INSTANCE
+ipAddresses:
+- ipAddress: 35.199.113.64
+  type: PRIMARY
+kind: sql#instance
+name: genesis
+project: genesis-214216
+region: southamerica-east1
+
+==================================================================
+/cloudsql/<INSTANCE_CONNECTION_NAME>
+
+/cloudsql/genesis-214216:southamerica-east1:genesis
+
+
+ cd c:\Dev\php\parkman
+ python %CLOUD_BIN%dev_appserver.py app.yaml
+
+time_in=1534867351210, dev_in='357262078810848'
+
+
+public void addReceipt(Receipt rec) throws Exception{
+        String sql = "INSERT INTO veh_receipts(veh_id,amount, txn_no, txn_type, user_id,txn_time)  VALUES (?,?,?,?,?,?)";
+        //compile the statement and start a transaction
+        SQLiteStatement statement = mDatabase.compileStatement(sql);
+        statement.clearBindings();
+
+        //String txnNo = Universe.BASE_SERIAL++ + Utilities.makeMinuteStamp();
+        //rec.setTxnId(txnNo);
+
+        statement.bindLong(1, rec.getVehId());
+        statement.bindDouble(2, rec.getAmount());
+        statement.bindString(3, rec.getTxnId());
+        statement.bindString(4, rec.getTxnType());
+        statement.bindLong(5, rec.getUserId());
+        statement.bindLong(6, rec.getTxnTime());
+
+        mDatabase.beginTransaction();
+
+        statement.execute();
+
+        //update receipt in details
+        String sqlr = "UPDATE veh_details SET charge=?,exemption=?, rcno=?,rctime=? WHERE id=?";
+
+        statement = mDatabase.compileStatement(sqlr);
+        statement.clearBindings();
+
+        statement.bindDouble(1,rec.getAmount());
+        statement.bindDouble(2,rec.getExemption());
+        statement.bindString(3,rec.getTxnId());
+        statement.bindLong(4,rec.getTxnTime());
+        statement.bindLong(5,rec.getVehId());
+
+        statement.execute();
+
+        mDatabase.setTransactionSuccessful();
+        mDatabase.endTransaction();
+
+    }
+
+
+[{
+    "id":"5","regNo":"UAN555H","stickerNo":"555",
+    "driver_name":"","driver_id":"","driver_phone":"",
+    "driver_photo":"","veh_photo":"","category":"Motor Cycle",
+    "color":"black","make":"Motor Cycle","model":null,"time_in":"1534869000233","time_out":null,"dev_in":"357262078810848","dev_out":null,"ver":"0","foot":""},{"id":"4","regNo":"UAN666H","stickerNo":"444","driver_name":"","driver_id":"","driver_phone":"","driver_photo":"","veh_photo":"","category":"Car","color":"black","make":"Car","model":null,"time_in":"1534868956250","time_out":null,"dev_in":"357262078810848","dev_out":null,"ver":"0","foot":""},{"id":"3","regNo":"UAN777H","stickerNo":"333","driver_name":"","driver_id":"","driver_phone":"","driver_photo":"","veh_photo":"","category":"Car","color":"black","make":"Car","model":null,"time_in":"1534868165732","time_out":null,"dev_in":"357262078810848","dev_out":null,"ver":"0","foot":""},{"id":"2","regNo":"UAN888H","stickerNo":"222","driver_name":"","driver_id":"","driver_phone":"","driver_photo":"","veh_photo":"","category":"Car","color":"black","make":"Car","model":null,"time_in":"1534868051980","time_out":null,"dev_in":"357262078810848","dev_out":null,"ver":"0","foot":""},{"id":"1","regNo":"UAN999H","stickerNo":"111","driver_name":"","driver_id":"","driver_phone":"","driver_photo":"","veh_photo":"","category":"Car","color":"black","make":"Car","model":null,"time_in":"1534867351210","time_out":null,"dev_in":"357262078810848","dev_out":null,"ver":"0","foot":""}]
+
+
+ "ffffffff-a306-e693-ffff-ffffab9ce8e8""tariff ..... ""makes ..... ""sync_mark ..... 
+ "{
+     "error":[],
+     "tariff":[
+         {"id":"1","grace_in":"1M","grace_out":"10M","psec":"0","pmin":"20","phour":"1000","pday":"0","pweek":"0","method":"PM","round":"CEIL","tar_code":"CYCLE","updatedon":"1535131165000","cli_code":"URA"},
+         {"id":"2","grace_in":"1M","grace_out":"10M","psec":"0","pmin":"50","phour":"2500","pday":"0","pweek":"0","method":"PM","round":"CEIL","tar_code":"SMALL","updatedon":"1535131165000","cli_code":"URA"},
+         {"id":"3","grace_in":"1M","grace_out":"10M","psec":"0","pmin":"90","phour":"5000","pday":"0","pweek":"0","method":"PM","round":"CEIL","tar_code":"MEDIUM","updatedon":"1535131165000","cli_code":"URA"},
+         {"id":"4","grace_in":"1M","grace_out":"10M","psec":"0","pmin":"120","phour":"7000","pday":"0","pweek":"0","method":"PM","round":"CEIL","tar_code":"BIG","updatedon":"1535131165000","cli_code":"URA"}
+         ],
+    "make":[],
+    "dev":[
+        {"id":"1","dev_id":"ffffffff-a306-e693-ffff-ffffab9ce8e8","cli_code":"URA","user_id":"1","user_name":"JOSHUA WASE","dev_stamp":"ffffffff-a306-e693-ffff-ffffab9ce8e8D1535132617000A1234","active":"Y"}
+        ],
+    "sync_mark":{"admin":1535132617000,"tariff":1535132617000,"make":1535132617000}}   
+
+
+    SELECT * FROM tariff WHERE  cli_code='URA' and updatedon > 1514754000000
+
+    1535135203000
+    1535131165000
+
+    select FROM_UNIXTIME(1535135203000) mine, FROM_UNIXTIME(1535131165000) cloud
+
+    select UNIX_TIMESTAMP('2018-01-01') one, UNIX_TIMESTAMP('2018-01-30') two, UNIX_TIMESTAMP('2018-08-24') three;
+
+
+    {"error":[],"info":"SUCCESS","data":[
+        {
+            "id":"2","regNo":"UAN888H","stickerNo":"222","pin":"222",
+            "driver_name":"","driver_id":"","driver_phone":"0200923794",
+            "driver_photo":"","veh_photo":"","category":"Car","color":"black",
+            "make":"Car","model":null,"rcno":"62331395","rctime":"1534968954015",
+            "time_in":"1534868051980","time_out":"0","dev_in":"357262078810848",
+            "dev_out":null,"ver":"0","foot":"","exemption":"0","park_area":"AREA 1"
+            
+            }]}
+
+
+//////////////////// call //////////////////////////////////////
+protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main); 
+   final Button button = (Button) findViewById(R.id.btn_call);
+    button.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+            String mobileNo = "123456789";
+            String uri = "tel:" + mobileNo.trim();
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse(uri));
+            startActivity(intent);
+        }
+    });*
+ }
+
+<uses-permission android:name="android.permission.CALL_PHONE" />
+
+
+SELECT id,regNo,stickerNo,driver_name,driver_id,driver_phone,driver_photo,veh_photo,category,color,make,model,ifnull(rcno,'') rcno,rctime,time_in,ifnull(time_out,0) time_out,dev_in,dev_out,ver,foot FROM veh_details
+
+SELECT id,regNo,stickerNo,driver_phone,category,model,ifnull(rcno,'') rcno,rctime,time_in,ifnull(time_out,0) time_out,dev_in,dev_out FROM veh_details
